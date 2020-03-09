@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MOvies App</title>
+  <style>
+    body {
+      background-color: azure;
+    }
+
+    .movies {
+      background-color: aqua;
+      border: 1px solid black;
+
+    }
+
+    .remove {
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>MOVIE LIST OF MOVIES THAT ARE LISTED</h1>
+  <form>
+    <input type="text" class="movie-title" placeholder="Movie Name">
+    <input type="text" class="movie-rating" placeholder="Movie Rating">
+    <button class="submit" type="reset">Submit!</button>
+  </form>
+  <div class="movies">
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
+    $(function () {
+      $("form").on("click", ".submit", function (event) {
+        let movieInput = $("input").eq(0).val();
+        let movieRating = $("input").eq(1).val();
+        let $movieListDiv = $("<div>").append(movieInput, "&nbsp; &nbsp; &nbsp; &nbsp;", movieRating).appendTo(".movies");
+
+        $("<button>").addClass("remove").text("Remove").appendTo($movieListDiv);
+        // $(".movies").append(movieInput);
+        // $(".movies").append(movieRating);
+
+
+      });
+
+      $(".movies").on("click", ".remove",function(event){
+        console.log("remove clicked")
+        $(event.target).parent().remove();
+        
+      });
+
+    })
+
+
+  </script>
+</body>
+
+</html>
