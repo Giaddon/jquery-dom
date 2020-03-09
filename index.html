@@ -74,7 +74,27 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
-  // Add your code here!
+  $(function () {
+    console.log("Let’s get ready to party with jQuery!");
+
+    $("article img").addClass("image-center");
+    $("article p:last-child").remove();
+    $("#title").css("font-size", ((Math.random() * 100) + "px"));
+    $("<li>").text("This is the new list item!").appendTo("ol");
+    $("aside").empty().text("I am so GD sorry.");
+    $("input").on("change", changeBackground);
+    $("img").on("click", function(){
+      this.remove();
+    });
+  });
+
+  function changeBackground() {
+    console.log("An input changed!")
+    let red = $("input").eq(0).val();
+    let blue = $("input").eq(1).val();
+    let green = $("input").eq(2).val();
+    $("body").css("background-color", `rgba(${red}, ${blue}, ${green})`);
+  }
 </script>
 </body>
 
