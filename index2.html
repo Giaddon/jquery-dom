@@ -14,6 +14,7 @@
     .movies {
       background-color: aqua;
       border: 1px solid black;
+      /* text-align: center; */
 
     }
 
@@ -21,27 +22,44 @@
       background-color: red;
       color: white;
     }
+
+    .sort {
+      background-color: red;
+      color: white;
+    }
+    .sort:active {
+      background-color: maroon;
+    }
+
   </style>
 </head>
 
 <body>
   <h1>MOVIE LIST OF MOVIES THAT ARE LISTED</h1>
   <form>
-    <input type="text" class="movie-title" placeholder="Movie Name">
-    <input type="text" class="movie-rating" placeholder="Movie Rating">
+    <input type="text" class="movie-title" minlength = "2"placeholder="Movie Name">
+    <input type="number" class="movie-rating" placeholder="Movie Rating">
     <button class="submit" type="submit">Submit!</button>
   </form>
   <div class="movies">
+    <button class="sort sort-title" type="button">Sort By Title!</button>
+    <button class="sort sort-rating"type="button">Sort By Rating!</button>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script>
     $(function () {
       $("form").on("submit", function (event) {
         event.preventDefault();
-        let movieInput = $(".movie-title").val();
-        let movieRating = $(".movie-rating").val();
+        let $movieInput = $("<span>").addClass("title").text($(".movie-title").val());
+
+        let $movieRating = $("<span>").addClass("rating").text($(".movie-rating").val());
+        if (Number($movieRating.text()) > 10 ) $movieRating.text(10);
+        if (Number($movieRating.text()) < 0) $movieRating.text(0);
+         
+        
         let $movieListDiv = $("<div>")
-          .append(movieInput, "&nbsp; &nbsp; &nbsp; &nbsp;", movieRating)
+          .addClass("movieRow")
+          .append($movieInput, "&nbsp; &nbsp; &nbsp; &nbsp;", $movieRating)
           .appendTo(".movies");
 
         $("<button>").addClass("remove").text("Remove").appendTo($movieListDiv);
@@ -53,6 +71,20 @@
         $(event.target).parent().remove();
 
       });
+
+      // // $(".sort-title").on("click",);
+      // $(".sort-rating").on("click",sortRating);
+
+      // function sortRating() {
+      //   let sortedRatings = [];
+      //   sortedRatings.push($(".rating").text());
+      //   //sortedRatings.sort();
+      //   console.log(sortedRatings)
+
+       
+
+      }
+
 
     })
 
